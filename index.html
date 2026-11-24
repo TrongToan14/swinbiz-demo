@@ -5,33 +5,229 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BDSP – Bank Data Security Program demo</title>
 <style>
-:root{--bg:#eef1f4;--panel:#fff;--ink:#14202b;--mute:#5d6b78;--line:#d5dce3;--teal:#0e7c86;--red:#c8321e;--amber:#a86a00;--redbg:#fbe9e6;--ambbg:#fcf1dc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root{color-scheme:light}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif}
-main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1rem;margin:0 0 10px}
-.sub{color:var(--mute);margin:0 0 18px;max-width:70ch}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px}
-.stat b{display:block;font-size:1.6rem;line-height:1.2}.stat span{color:var(--mute);font-size:.82rem}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
-button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
-button:hover{border-color:var(--teal)}button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-button.go{background:var(--teal);color:#fff;border-color:var(--teal)}
-.lbl{color:var(--mute);font-size:.85rem;margin-left:6px}
-.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
-@media(max-width:800px){.grid{grid-template-columns:1fr}}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;min-width:0}
-.feed,.alerts{height:380px;overflow:auto}
-.row{display:grid;grid-template-columns:62px 90px 1fr;gap:8px;font:12.5px/1.45 ui-monospace,Consolas,monospace;padding:3px 0;border-bottom:1px solid var(--line)}
-.row.bad{color:var(--red)}.row i{font-style:normal;color:var(--mute)}
-.alert{border-left:4px solid var(--red);background:var(--redbg);padding:8px 10px;margin-bottom:8px;border-radius:0 6px 6px 0}
-.alert.review{border-color:var(--amber);background:var(--ambbg)}
-.alert b{display:block}.alert small{color:var(--mute)}
-.empty{color:var(--mute)}
-.note{color:var(--mute);font-size:.82rem;margin-top:12px}
-@media(prefers-reduced-motion:no-preference){.alert{animation:in .3s}@keyframes in{from{opacity:0;transform:translateX(8px)}}}
+:root{
+
+    --panel:#F5F0EA;  
+    --ink:#461C0C;     
+    --mute:#7A675F;  
+    --line:#C8BBB0;    
+
+    --teal:#269991;       
+    --red:#461C0C;      
+    --amber:#269991;
+    --redbg:#EFE4DB;    
+    --ambbg:#DDF2F0;       
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+:root{
+    color-scheme:light;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-padding-top:env(safe-area-inset-top,0px);
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:15px/1.5 "Segoe UI",system-ui,sans-serif;
+}
+
+main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 16px 40px;
+}
+
+h1{
+    font-size:1.5rem;
+    margin:0 0 4px;
+    color:var(--ink);
+}
+
+h2{
+    font-size:1rem;
+    margin:0 0 10px;
+    color:var(--ink);
+}
+
+.sub{
+    color:var(--mute);
+    margin:0 0 18px;
+    max-width:70ch;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.stat{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 14px;
+    box-shadow:0 2px 8px rgba(70,28,12,.08);
+}
+
+.stat b{
+    display:block;
+    font-size:1.6rem;
+    line-height:1.2;
+    color:var(--ink);
+}
+
+.stat span{
+    color:var(--mute);
+    font-size:.82rem;
+}
+
+.bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+    align-items:center;
+}
+
+button{
+    font:inherit;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--ink);
+    padding:7px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+button:hover{
+    border-color:var(--teal);
+    background:#efe8e1;
+}
+
+button:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:2px;
+}
+
+button.go{
+    background:var(--teal);
+    color:#fff;
+    border-color:var(--teal);
+}
+
+button.go:hover{
+    background:#22867f;
+    border-color:#22867f;
+}
+
+.lbl{
+    color:var(--mute);
+    font-size:.85rem;
+    margin-left:6px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:14px;
+}
+
+@media(max-width:800px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.box{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    min-width:0;
+    box-shadow:0 4px 12px rgba(70,28,12,.08);
+}
+
+.feed,
+.alerts{
+    height:380px;
+    overflow:auto;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:62px 90px 1fr;
+    gap:8px;
+    font:12.5px/1.45 ui-monospace,Consolas,monospace;
+    padding:3px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.row.bad{
+    color:var(--red);
+    font-weight:600;
+}
+
+.row i{
+    font-style:normal;
+    color:var(--mute);
+}
+
+.alert{
+    border-left:4px solid var(--red);
+    background:var(--redbg);
+    padding:8px 10px;
+    margin-bottom:8px;
+    border-radius:0 6px 6px 0;
+}
+
+.alert.review{
+    border-color:var(--teal);
+    background:var(--ambbg);
+}
+
+.alert b{
+    display:block;
+    color:var(--ink);
+}
+
+.alert small{
+    color:var(--mute);
+}
+
+.empty{
+    color:var(--mute);
+}
+
+.note{
+    color:var(--mute);
+    font-size:.82rem;
+    margin-top:12px;
+}
+
+@media(prefers-reduced-motion:no-preference){
+    .alert{
+        animation:in .3s;
+    }
+
+    @keyframes in{
+        from{
+            opacity:0;
+            transform:translateX(8px);
+        }
+    }
+}
 </style>
 </head>
 <body>
@@ -55,7 +251,6 @@ button.go{background:var(--teal);color:#fff;border-color:var(--teal)}
 <button data-a="root">Root login, no MFA</button>
 <button data-a="iam">Admin policy attached</button>
 <button data-a="trail">CloudTrail stopped</button>
-<button data-a="newip">Login from new IP</button>
 <button id="reset">Reset</button>
 </div>
 
@@ -112,7 +307,7 @@ function trail(ev,user,extra,t0){
  if(ev==='ConsoleLogin'&&user==='root'&&extra==='MFA: no')alertBox('Root login without MFA','Root console login from '+ip(),0,t0||Date.now());
  if(ev==='AttachUserPolicy'&&extra==='AdministratorAccess')alertBox('Admin policy attached',user+' granted AdministratorAccess',0,t0||Date.now());
  if(ev==='StopLogging')alertBox('CloudTrail logging stopped',user+' disabled audit logging',0,t0||Date.now());
- if(ev==='ConsoleLogin'&&extra==='new IP')alertBox('Console login from new IP',user+' signed in from an unseen address; confirm with the user','review');
+ if(ev==='ConsoleLogin'&&extra==='new IP')alertBox('Console login from new IP',user+' signed in from an unseen address; confirm with the user',1);
 }
 function normal(){
  var r=Math.random();
@@ -128,8 +323,7 @@ var attacks={
  exfil:function(){var t0=Date.now();setTimeout(function(){flow('10.0.2.8',ip(),443,'ACCEPT',(6+Math.random()*4)*1e8,t0)},900)},
  root:function(){var t0=Date.now();setTimeout(function(){trail('ConsoleLogin','root','MFA: no',t0)},600)},
  iam:function(){var t0=Date.now();setTimeout(function(){trail('AttachUserPolicy','dev-lan','AdministratorAccess',t0)},600)},
- trail:function(){var t0=Date.now();setTimeout(function(){trail('StopLogging','dev-lan','',t0)},600)},
- newip:function(){setTimeout(function(){trail('ConsoleLogin','analyst-an','new IP')},400)}
+ trail:function(){var t0=Date.now();setTimeout(function(){trail('StopLogging','dev-lan','',t0)},600)}
 };
 Array.prototype.forEach.call(document.querySelectorAll('[data-a]'),function(b){b.onclick=function(){attacks[b.dataset.a]()}});
 $('play').onclick=function(){running=!running;this.textContent=running?'Pause stream':'Resume stream'};

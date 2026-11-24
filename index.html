@@ -229,12 +229,34 @@ button.go:hover{
         }
     }
 }
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+}
+
+.brand img{
+    height:56px;
+    width:auto;
+    display:block;
+    flex:none;
+    border-radius:8px;
+}
+
+.brand h1{
+    margin:0;
+}
 </style>
 </head>
 <body>
 <main>
-<h1>Bank Data Security Program (BDSP)</h1>
-<p class="sub">Simulated demo of the detection pipeline: VPC Flow Logs and CloudTrail events stream in, rules flag suspicious behaviour, and alerts appear within seconds. All data here is generated in your browser.</p>
+<header class="brand">
+<img src="invictus_logo.jpg" alt="Invictus Tech logo">
+<h1>Invictus - Swinbiz Demonstration</h1>
+</header>
 
 <div class="stats">
 <div class="stat"><b id="sEv">0</b><span>Events scanned</span></div>
@@ -261,7 +283,7 @@ button.go:hover{
 <section class="box"><h2>Alerts</h2><div class="alerts" id="alerts"><p class="empty" id="none">No alerts yet. Start an attack above to see detection.</p></div></section>
 </div>
 
-<p class="note">Detection rules: 12+ distinct ports from one source in 10 s; 6+ rejected SSH attempts from one source in 10 s; single outbound flow over 500 MB to an external IP; root console login without MFA; AdministratorAccess attached to a user; CloudTrail logging stopped; console login from a new IP (review only).</p>
+<p class="note">Detection rules: 12+ distinct ports from one source in 10 s; 6+ rejected SSH attempts from one source in 10 s; single outbound flow over 500 MB to an external IP; root console login without MFA; AdministratorAccess attached to a user; CloudTrail logging stopped; console login from a new IP.</p>
 </main>
 <script>
 (function(){

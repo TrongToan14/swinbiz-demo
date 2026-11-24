@@ -7,6 +7,7 @@
 <style>
 :root{
 
+    --bg:#EBE2D8;
     --panel:#F5F0EA;  
     --ink:#461C0C;     
     --mute:#7A675F;  
@@ -251,6 +252,7 @@ button.go:hover{
 <button data-a="root">Root login, no MFA</button>
 <button data-a="iam">Admin policy attached</button>
 <button data-a="trail">CloudTrail stopped</button>
+<button data-a="newip">Login from new IP</button>
 <button id="reset">Reset</button>
 </div>
 
@@ -307,7 +309,7 @@ function trail(ev,user,extra,t0){
  if(ev==='ConsoleLogin'&&user==='root'&&extra==='MFA: no')alertBox('Root login without MFA','Root console login from '+ip(),0,t0||Date.now());
  if(ev==='AttachUserPolicy'&&extra==='AdministratorAccess')alertBox('Admin policy attached',user+' granted AdministratorAccess',0,t0||Date.now());
  if(ev==='StopLogging')alertBox('CloudTrail logging stopped',user+' disabled audit logging',0,t0||Date.now());
- if(ev==='ConsoleLogin'&&extra==='new IP')alertBox('Console login from new IP',user+' signed in from an unseen address; confirm with the user',1);
+ if(ev==='ConsoleLogin'&&extra==='new IP')alertBox('Console login from new IP',user+' signed in from an unseen address; confirm with the user','review');
 }
 function normal(){
  var r=Math.random();
@@ -323,7 +325,8 @@ var attacks={
  exfil:function(){var t0=Date.now();setTimeout(function(){flow('10.0.2.8',ip(),443,'ACCEPT',(6+Math.random()*4)*1e8,t0)},900)},
  root:function(){var t0=Date.now();setTimeout(function(){trail('ConsoleLogin','root','MFA: no',t0)},600)},
  iam:function(){var t0=Date.now();setTimeout(function(){trail('AttachUserPolicy','dev-lan','AdministratorAccess',t0)},600)},
- trail:function(){var t0=Date.now();setTimeout(function(){trail('StopLogging','dev-lan','',t0)},600)}
+ trail:function(){var t0=Date.now();setTimeout(function(){trail('StopLogging','dev-lan','',t0)},600)},
+ newip:function(){setTimeout(function(){trail('ConsoleLogin','analyst-an','new IP')},400)}
 };
 Array.prototype.forEach.call(document.querySelectorAll('[data-a]'),function(b){b.onclick=function(){attacks[b.dataset.a]()}});
 $('play').onclick=function(){running=!running;this.textContent=running?'Pause stream':'Resume stream'};
